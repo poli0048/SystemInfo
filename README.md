@@ -1,2 +1,2 @@
 # SystemInfo
-Platform Independent System Info Header Library, with CPUID/Intrinsics Info.
+Runtime System Info Header Library, with CPUID/Intrinsics Info; Platform Independent
