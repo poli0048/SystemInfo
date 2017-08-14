@@ -24,7 +24,11 @@
 	#error "Unable to define GetInstalledMemorySizeBytes( ) for an unknown OS."
 #endif
 
-namespace SystemInfo {
+#ifndef SYSTEMINFO_NS
+	#define SYSTEMINFO_NS SystemInfo
+#endif
+
+namespace SYSTEMINFO_NS {
 	
 	struct CPUCapabilities;
 
