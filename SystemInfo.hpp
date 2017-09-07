@@ -9,6 +9,7 @@
 #include <bitset>
 #include <array>
 #include <cstdint>
+#include <iomanip>
 
 #if defined(_WIN32)
 	#include <Windows.h>
@@ -99,7 +100,7 @@ namespace SYSTEMINFO_NS {
 
 /// Get the size of installed RAM available to the OS, in bytes.
 /// This function is very platform and environment-specific
-inline uint64_t SystemInfo::GetInstalledMemorySizeBytes() 
+inline uint64_t SYSTEMINFO_NS::GetInstalledMemorySizeBytes() 
 {
 	#if defined(_WIN32) && (defined(__CYGWIN__) || defined(__CYGWIN32__))
 		// Cygwin under Windows. ------------------------------------
@@ -195,7 +196,7 @@ static inline void cpuid(int output[4], int functionnumber)
 	#endif
 }
 
-static inline SystemInfo::CPUCapabilities SystemInfo::GetCPUCapabilities() 
+static inline SYSTEMINFO_NS::CPUCapabilities SYSTEMINFO_NS::GetCPUCapabilities() 
 {
 	int nIds;
 	int nExIds;
@@ -364,12 +365,12 @@ static inline std::string vectorOfStringsToCSL(std::vector<std::string> VecOfStr
 }
 
 // Get a string with formatted, human-readable text showing info on the running system
-static inline std::string SystemInfo::GetSystemInfoString() 
+static inline std::string SYSTEMINFO_NS::GetSystemInfoString() 
 {
-	uint64_t InstalledRAM_Bytes = SystemInfo::GetInstalledMemorySizeBytes();
+	uint64_t InstalledRAM_Bytes = SYSTEMINFO_NS::GetInstalledMemorySizeBytes();
 	uint64_t InstalledRAM_MiB = InstalledRAM_Bytes / (uint64_t) 1024U / (uint64_t) 1024U;
 	double InstalledRAM_GiB = (double) InstalledRAM_MiB / 1024.0;
-	SystemInfo::CPUCapabilities CPU = SystemInfo::GetCPUCapabilities();
+	SYSTEMINFO_NS::CPUCapabilities CPU = SYSTEMINFO_NS::GetCPUCapabilities();
 	
 	std::ostringstream strStream;
 	strStream << std::fixed << std::setprecision(1) << InstalledRAM_GiB;
