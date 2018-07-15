@@ -747,10 +747,10 @@ namespace SYSTEMINFO_NS {
 				#if defined __unix
 				char *home = getenv("XDG_CONFIG_HOME");
 				if (home != nullptr)
-					return std::filesystem::path(home) / appName;
+					return std::filesystem::path(home) / appName / "Library";
 				home = getenv("HOME");
 				if (home != nullptr)
-					return std::filesystem::path(home) / appName;
+					return std::filesystem::path(home) / appName / "Library";
 				else
 					return std::filesystem::path();
 				#elif defined _WIN32
