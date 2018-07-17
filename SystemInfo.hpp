@@ -125,6 +125,7 @@ namespace SYSTEMINFO_NS {
 			// This is only tested on Linux and Windows so far and I had to make some modifications to get it 
 			// working there so don't expect perfection on other platforms without testing.
 			std::filesystem::path ThisExecutableFile();
+			std::filesystem::path ThisExecutableDirectory();
 		}
 	}
 }
@@ -773,7 +774,12 @@ namespace SYSTEMINFO_NS {
 				#else
 				return std::string();
 				#endif
-		}
+			}
+			
+			std::filesystem::path ThisExecutableDirectory()
+			{
+				return ThisExecutableFile().parent_path();
+			}
 		}
 
 	}
