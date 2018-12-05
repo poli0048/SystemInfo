@@ -164,6 +164,11 @@ namespace SYSTEMINFO_NS {
 	#include <locale>
 	#include <codecvt>
 	#include <intrin.h>
+	#if defined UNICODE
+		#define SYSINFO_CSTR_TYPE LPCWSTR
+	#else
+		#define SYSINFO_CSTR_TYPE LPCSTR
+	#endif
 #endif
 
 #ifdef IS_APPLE
@@ -207,7 +212,7 @@ namespace SYSTEMINFO_NS {
 				if ((instanceLockFileHandle != -1) && (lockReturnCode == 0))
 					lockActive = true;
 				#else
-				instanceLockFileHandle = CreateFile(lockFilePath.string().c_str(), // Path to write
+				instanceLockFileHandle = CreateFile((SYSINFO_CSTR_TYPE)(void *)lockFilePath.string().c_str(), // Path to write
 					GENERIC_WRITE,                 // Open for writing
 					0,                             // Obtain exclusive lock to file while handle is open
 					NULL,                          // Default security
@@ -232,7 +237,7 @@ namespace SYSTEMINFO_NS {
 				if ((instanceLockFileHandle != -1) && (lockReturnCode == 0))
 					lockActive = true;
 				#else
-				instanceLockFileHandle = CreateFile(lockFilePath.string().c_str(), // Path to write
+				instanceLockFileHandle = CreateFile((SYSINFO_CSTR_TYPE)(void *)lockFilePath.string().c_str(), // Path to write
 					GENERIC_WRITE,                 // Open for writing
 					0,                             // Obtain exclusive lock to file while handle is open
 					NULL,                          // Default security
